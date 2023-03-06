@@ -11,8 +11,11 @@ const socketIo = require('socket.io')(http,{
 socketIo.on('connection', (socket)=>{
     console.log('user connect');
     
-    socket.on('message',()=>{
-        console.log('message!');
+    socket.on('message',(data)=>{
+        console.log(data.text);
+        socketIo.emit('messageResponse',{
+            text:data.text
+        })
     })
     
     socket.on('disconect',()=>{
